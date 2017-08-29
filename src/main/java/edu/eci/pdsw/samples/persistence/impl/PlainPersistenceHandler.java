@@ -5,6 +5,9 @@
  */
 package edu.eci.pdsw.samples.persistence.impl;
 
+import code.CodeType;
+import codeType.impl.UTF8EncodingValidator;
+import com.google.inject.Inject;
 import edu.eci.pdsw.samples.persistence.PersistenceHandler;
 import java.util.logging.Logger;
 
@@ -13,18 +16,13 @@ import java.util.logging.Logger;
  * @author hcadavid
  */
 public class PlainPersistenceHandler implements PersistenceHandler{
-
-    UTF8EncodingValidator encodingValidator=new UTF8EncodingValidator();
-    
+    @Inject
+    private CodeType codeTy;
     @Override
     public void save(String content, String fileName) {
         
-        if (encodingValidator.validateRequiredEncoding(content)){
-            LOG.info("Saving "+fileName+" in PLAIN TEXT");
-        }
-        else{
-            LOG.info("Unable to Save "+fileName+" in PLAIN TEXT. Check your document encoding!");
-        }        
+        codeTy.save(content,fileName);
+        LOG.info("Saving "+fileName+" in PLAIN TEXT"); 
         
     }
     private static final Logger LOG = Logger.getLogger(PlainPersistenceHandler.class.getName());
@@ -32,7 +30,7 @@ public class PlainPersistenceHandler implements PersistenceHandler{
     @Override
     public String load(String fileName) {
         LOG.info("LOADING "+fileName+" in PLAIN TEXT");
-        return "";
+        return codeTy.load(fileName);        
     }
     
 }

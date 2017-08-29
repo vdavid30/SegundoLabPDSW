@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.pdsw.samples.persistence;
+package code;
 
 /**
  *
- * @author hcadavid
+ * @author 2114928
  */
-public interface PersistenceHandler {
-    
-    public void save(String content, String fileName);
+public interface CodeType {
     public String load(String fileName);
-    
+    public void save(String content,String name);
 }

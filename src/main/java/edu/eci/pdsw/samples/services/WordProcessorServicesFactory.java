@@ -5,6 +5,8 @@
  */
 package edu.eci.pdsw.samples.services;
 
+import code.CodeType;
+import codeType.impl.*;
 import com.google.inject.AbstractModule;
 import edu.eci.pdsw.samples.services.impl.WordProcessorServicesImpl;
 
@@ -14,7 +16,7 @@ import edu.eci.pdsw.samples.persistence.PersistenceHandler;
 import edu.eci.pdsw.samples.persistence.impl.PlainPersistenceHandler;
 import edu.eci.pdsw.samples.persistence.impl.SerializationPersistenceHandler;
 import edu.eci.pdsw.samples.spelling.TypoCorrector;
-import edu.eci.pdsw.samples.spelling.impl.OnlineTypoCorrector;
+import edu.eci.pdsw.samples.spelling.impl.*;
 
 /**
  *
@@ -32,11 +34,11 @@ public class WordProcessorServicesFactory {
 
                     
                     protected void configure() {
-                        bind(TypoCorrector.class).to(OnlineTypoCorrector.class);
-                        bind(PersistenceHandler.class).to(SerializationPersistenceHandler.class);
-                        bind(WordProcessorServices.class).to(WordProcessorServicesImpl.class);
+                        bind(TypoCorrector.class).to(LocalTypoCorrector.class);
+                        bind(PersistenceHandler.class).to(PlainPersistenceHandler.class);
+                        bind(WordProcessorServices.class).to(WordProcessorServicesImpl.class);                      
+                        bind(CodeType.class).to(UTF8EncodingValidator.class);
                     }
-
                 }
                 
         );
